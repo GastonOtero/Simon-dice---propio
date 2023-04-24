@@ -14,6 +14,17 @@ const colores = {
     4 : $rojo,
 };
 
+function mostrarSecuenciaMaquina(secuencia) {
+    for(let i = 0; i < secuencia.length; i++){
+        encenderLuz(colores[secuencia[i]]);
+        apagarLuz(colores[secuencia[i]]);
+    }
+}
+
+function jugadaMaquina() {
+    secuenciaMaquina.push(seleccionMaquina());
+}
+
 function seleccionMaquina() {
     return Math.floor(Math.random() * 4) + 1;
 };
@@ -30,8 +41,12 @@ function pasarDeRonda() {
     }*/
 };
 
-//no funciona, mirar
+function encenderLuz(color) {
+    color.classList.remove("apagado");
+    color.classList.add("encendido");
+}
 
-function encenderLuz() {
-    $azul.sytle.filter = "brightness(150%)";
+function apagarLuz(color) {
+    color.classList.remove("encendido");
+    color.classList.add("apagado");
 }
