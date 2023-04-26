@@ -14,10 +14,29 @@ const colores = {
     4 : $rojo,
 };
 
+//Prueba del event listener
+
+Object.values(colores).forEach((value, i) => {
+    value.addEventListener('click', function() {
+        secuenciaJugador.push(Object.keys(colores)[i]);
+        encenderLuz(value);
+        setTimeout(() => {apagarLuz(value)}, 300);
+    });
+});
+    
+
 function mostrarSecuenciaMaquina(secuencia) {
+    const demora = 1000;
+    let tiempo = demora;
+
     for(let i = 0; i < secuencia.length; i++){
-        encenderLuz(colores[secuencia[i]]);
-        apagarLuz(colores[secuencia[i]]);
+        setTimeout(() => {
+            encenderLuz(colores[secuencia[i]]);
+                setTimeout(() => {
+                    apagarLuz(colores[secuencia[i]]);
+                }, demora);
+        }, tiempo);
+        tiempo += demora * 2;
     }
 }
 
