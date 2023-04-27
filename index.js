@@ -1,4 +1,4 @@
-let contador = 0;
+let contador = 1;
 let secuenciaMaquina = [];
 let secuenciaJugador = [];
 
@@ -14,16 +14,40 @@ const colores = {
     4 : $rojo,
 };
 
-//Prueba del event listener
 
-Object.values(colores).forEach((value, i) => {
-    value.addEventListener('click', function() {
-        secuenciaJugador.push(Object.keys(colores)[i]);
-        encenderLuz(value);
-        setTimeout(() => {apagarLuz(value)}, 300);
+function turnoJugador(){
+    escucharJugador();
+};
+
+function turnoMaquina(){
+    anularJugador();
+    jugadaMaquina();
+    mostrarSecuenciaMaquina(secuenciaMaquina);
+};
+
+
+function escucharJugador() {
+    Object.values(colores).forEach((value) => {
+        value.addEventListener('click', switchJugador);
     });
-});
-    
+    secuenciaJugador = [];
+};
+
+
+function anularJugador() {
+    Object.values(colores).forEach((value) => {
+        value.removeEventListener('click', switchJugador);
+    });
+};
+
+
+function switchJugador() {
+    const color = Object.values(colores).indexOf(this); 
+        secuenciaJugador.push(Number(Object.keys(colores)[color]));
+        encenderLuz(this);
+        setTimeout(() => {apagarLuz(this)}, 300);
+};
+
 
 function mostrarSecuenciaMaquina(secuencia) {
     const demora = 1000;
@@ -38,11 +62,12 @@ function mostrarSecuenciaMaquina(secuencia) {
         }, tiempo);
         tiempo += demora * 2;
     }
-}
+};
+
 
 function jugadaMaquina() {
     secuenciaMaquina.push(seleccionMaquina());
-}
+};
 
 function seleccionMaquina() {
     return Math.floor(Math.random() * 4) + 1;
@@ -58,6 +83,7 @@ function pasarDeRonda() {
     } /*else {
         Una función que de un mensaje de error(?)
     }*/
+    return compararJugadas(secuenciaMaquina, secuenciaJugador);
 };
 
 function encenderLuz(color) {
