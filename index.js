@@ -15,6 +15,7 @@ const colores = {
 };
 
 
+
 function turnoJugador(){
     escucharJugador();
 };
@@ -80,9 +81,9 @@ function compararJugadas(maquina, jugador) {
 function pasarDeRonda() {
     if (compararJugadas(secuenciaMaquina, secuenciaJugador)) {
         contador++;
-    } /*else {
-        Una función que de un mensaje de error(?)
-    }*/
+    } else {
+        alert("Las secuencias no coinciden")
+    }
     return compararJugadas(secuenciaMaquina, secuenciaJugador);
 };
 
