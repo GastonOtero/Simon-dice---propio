@@ -16,14 +16,18 @@ const colores = {
 
 
 
-function turnoJugador(){
-    escucharJugador();
-};
 
-function turnoMaquina(){
+function manejarTurnos(){
+    const RETRASO_TURNO_JUGADOR = (secuenciaMaquina.length + 1) * 1000;
+    
     anularJugador();
     jugadaMaquina();
     mostrarSecuenciaMaquina(secuenciaMaquina);
+    
+    setTimeout(() => {
+        escucharJugador()
+    }, RETRASO_TURNO_JUGADOR);
+
 };
 
 
@@ -43,10 +47,11 @@ function anularJugador() {
 
 
 function switchJugador() {
+    const demoraEnApagar = 300;
     const color = Object.values(colores).indexOf(this); 
         secuenciaJugador.push(Number(Object.keys(colores)[color]));
         encenderLuz(this);
-        setTimeout(() => {apagarLuz(this)}, 300);
+        setTimeout(() => {apagarLuz(this)}, demoraEnApagar);
 };
 
 
@@ -79,12 +84,8 @@ function compararJugadas(maquina, jugador) {
 };
 
 function pasarDeRonda() {
-    if (compararJugadas(secuenciaMaquina, secuenciaJugador)) {
-        contador++;
-    } else {
-        alert("Las secuencias no coinciden")
-    }
-    return compararJugadas(secuenciaMaquina, secuenciaJugador);
+    contador++;
+    manejarTurnos();
 };
 
 function encenderLuz(color) {
