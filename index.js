@@ -35,6 +35,7 @@ function escucharJugador() {
     Object.values(colores).forEach((value) => {
         value.addEventListener('click', switchJugador);
     });
+
     secuenciaJugador = [];
 };
 
@@ -49,9 +50,17 @@ function anularJugador() {
 function switchJugador() {
     const demoraEnApagar = 300;
     const color = Object.values(colores).indexOf(this); 
+
         secuenciaJugador.push(Number(Object.keys(colores)[color]));
         encenderLuz(this);
         setTimeout(() => {apagarLuz(this)}, demoraEnApagar);
+
+        if(secuenciaMaquina.length === secuenciaJugador.length){
+            setTimeout(() => {
+                pasarDeRonda()
+            }, 1000);
+        };
+        
 };
 
 
@@ -84,8 +93,10 @@ function compararJugadas(maquina, jugador) {
 };
 
 function pasarDeRonda() {
-    contador++;
-    manejarTurnos();
+    if(compararJugadas(secuenciaMaquina, secuenciaJugador)) {
+        contador++;
+        manejarTurnos();
+    }
 };
 
 function encenderLuz(color) {
