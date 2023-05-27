@@ -96,7 +96,10 @@ function pasarDeRonda() {
     if(compararJugadas(secuenciaMaquina, secuenciaJugador)) {
         contador++;
         manejarTurnos();
+    } else {
+        alert("las secuencias no coinciden");
     }
+
 };
 
 function encenderLuz(color) {
