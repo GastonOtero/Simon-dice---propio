@@ -14,14 +14,18 @@ const colores = {
     4 : $rojo,
 };
 
+let $ronda = document.querySelector("#ronda");
+const $mensaje = document.querySelector("#mensaje");
 
-
+document.querySelector("#boton-jugar").onclick = manejarTurnos;
 
 function manejarTurnos(){
     const RETRASO_TURNO_JUGADOR = (secuenciaMaquina.length + 1) * 1000;
     
+    ocultarMensajeError();
     anularJugador();
     jugadaMaquina();
+    actualizarContador();
     mostrarSecuenciaMaquina(secuenciaMaquina);
     
     setTimeout(() => {
@@ -97,10 +101,20 @@ function pasarDeRonda() {
         contador++;
         manejarTurnos();
     } else {
-        alert("las secuencias no coinciden");
+        mostrarMensajeError();
+        reiniciar();
     }
-
 };
+
+function reiniciar(){
+    contador = 1;
+    secuenciaMaquina = [];
+    $ronda.innerText = "";
+}
+
+function actualizarContador(){
+    $ronda.innerText = `Ronda: ${contador}`;    
+}
 
 function encenderLuz(color) {
     color.classList.remove("apagado");
@@ -110,4 +124,12 @@ function encenderLuz(color) {
 function apagarLuz(color) {
     color.classList.remove("encendido");
     color.classList.add("apagado");
+}
+
+function mostrarMensajeError() {
+    $mensaje.className = "";
+}
+
+function ocultarMensajeError() {
+    $mensaje.className = "oculto";
 }

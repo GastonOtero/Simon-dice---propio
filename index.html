@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <title>Simon dice</title>
 </head>
 <body>
@@ -15,16 +18,20 @@
         <h1>Simon dice</h1>
     </header>
     <section>
+        <div id="mensaje" class="oculto">
+            <p>Las secuencias no coinciden, presioná "Jugar" para volver a intentar.</p>
+        </div>
         <div id="negro">
             <div id="amarillo" class="color apagado"></div>
             <div id="azul" class="color apagado"></div>
             <div id="verde" class="color apagado"></div>
             <div id="rojo" class="color apagado"></div>
             <div id="centro">
-                <div id="contador">""</div>
-                <div id="botones">
-                    <button>Comenzar</button>
-                    <button>Reiniciar</button>
+                <div id="contador">
+                    <p id="ronda"></p>
+                </div>
+                <div>
+                    <button id="boton-jugar">Jugar</button>
                 </div>
             </div>
         </div>
